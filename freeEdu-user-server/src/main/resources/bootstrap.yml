@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: freeedu-user-server
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+
+        #命令空间 默认public
+        namespace: fec9e7c0-7312-4685-87d5-62b667d45fc9
+        #group 默认 DEFAULT_GROUP
+        group: dev_group
+
+      discovery:
+        server-addr: localhost:8848

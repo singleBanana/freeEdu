@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="freeEdu-common" />
+        <module name="freeEdu-user-server" />
+        <module name="freeEdu-gateway-server" />
+        <module name="freeEdu-order-system-server" />
+        <module name="freeEdu-config-server" />
+        <module name="freeEdu-eureka-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="freeEdu-alibaba-maven" target="8" />
+      <module name="freeEdu-parent" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="freeEdu-alibaba-maven" options="-parameters" />
+      <module name="freeEdu-common" options="-parameters" />
+      <module name="freeEdu-config-server" options="-parameters" />
+      <module name="freeEdu-eureka-server" options="-parameters" />
+      <module name="freeEdu-gateway-server" options="-parameters" />
+      <module name="freeEdu-order-system-server" options="-parameters" />
+      <module name="freeEdu-parent" options="-parameters" />
+      <module name="freeEdu-user-server" options="-parameters" />
+    </option>
+  </component>
+</project>

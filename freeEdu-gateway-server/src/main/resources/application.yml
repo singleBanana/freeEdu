@@ -1,0 +1,56 @@
+server:
+  port: 80
+spring:
+  application:
+    name: freeedu-gateway-server
+  cloud:
+    gateway:
+      routes:
+        - id: freeEdu-user-server
+          uri: lb://freeedu-user-server
+          predicates:
+            - Path=/user/v1/**
+
+        - id: freeEdu-order-server
+          uri: lb://freeedu-order-server
+          predicates:
+            - Path=/order/v1/**
+
+
+eureka:
+  client:
+    registry-fetch-interval-seconds: 10  #定时拉取注册表
+#    register-with-eureka: false #服务消费者可以不向服务注册中心注册服务
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+    fetch-registry: true  #服务消费者客户端需要去检索服务
+    register-with-eureka: true
+  instance:
+    port: 7001
+    hostname: localhost
+    instance-id: gateway-server
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 3 # 发送心跳
+    lease-expiration-duration-in-seconds: 6  # 这个实例多少秒没检查到心跳视为下线
+
+ribbon:
+  ReadTimeout: 6000 #建立连接所用的时间，适用于网络状况正常的情况下，两端两端连接所用的时间
+  ConnectionTimeout: 6000 #建立连接后，服务器读取到可用资源的时间
+
+#####################spring cloud 使用 Spring Boot actuator 监控完善信息###########################################
+# Spring Boot 2.50对 actuator 监控屏蔽了大多数的节点，只暴露了 heath 节点，本段配置（*）就是为了开启所有的节点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"    # * 在yaml文件属于关键字，所以需要加引号
+info:
+  app.name: freeEdu-gateway-server
+
+#开启客户端 hystrix
+feign:
+  hystrix:
+    enabled: true
+
+
+

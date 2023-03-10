@@ -1,0 +1,53 @@
+server:
+  port: 8012
+  servlet:
+    context-path: /order/v1
+spring:
+  autoconfigure:
+    exclude: org.springframework.cloud.client.serviceregistry.AutoServiceRegistrationAutoConfiguration,org.springframework.cloud.client.serviceregistry.ServiceRegistryAutoConfiguration
+
+  application:
+    name: freeedu-order-server
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/order-center?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true
+    username: fat
+    password: Mn5GfUyu5I
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: hrss-course-serverHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: select 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: fec9e7c0-7312-4685-87d5-62b667d45fc9
+
+
+eureka:
+  client:
+    registry-fetch-interval-seconds: 10  #定时拉取注册表
+#    register-with-eureka: false #服务消费者可以不向服务注册中心注册服务
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+    fetch-registry: true  #服务消费者客户端需要去检索服务
+  instance:
+    port: 7001
+    hostname: localhost
+    instance-id: order-server
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 3 # 发送心跳
+    lease-expiration-duration-in-seconds: 6  # 这个实例多少秒没检查到心跳视为下线
+
+
+
+
+
+
